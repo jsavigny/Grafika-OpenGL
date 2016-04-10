@@ -15,6 +15,8 @@
 
 #include <GL/glut.h>
 #include <iostream>
+#include <unistd.h>
+
 
 using namespace std;
 int input_points;
@@ -52,7 +54,7 @@ void drawGasket()
     int rand();       /* standard random number generator */
     point2 p ={75.0,50.0};  /* An arbitrary initial point inside triangle */
 
-    /* compute and plot 5000 points on the gasket: */
+    /* compute and plot points on the gasket: */
     for( k=0; k<input_points; k++)
     {
       /* first, pick a vertex at random */
@@ -86,6 +88,7 @@ void display()
 
 int main(int argc, char** argv)
 {
+    cout << "Masukkan Jumlah Titik : ";
     cin>>input_points;
     glutInit(&argc,argv);
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB); /* default, not needed */

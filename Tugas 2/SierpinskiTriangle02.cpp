@@ -73,6 +73,7 @@ void display() {
  
 int main(int argc, char** argv) {
 	srand(time(0));
+	cout << "Masukkan Jumlah Rekursi Maksimum : ";
 	cin >> input_level;
 	glutInit(&argc, argv);                 // Initialize GLUT
 	glutInitWindowSize(320, 320);   // Set the window's initial width & height

@@ -2,10 +2,12 @@
 
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <ctime>
+#include <iostream>
 
 using namespace std;
-//*******************************************************
-// Function from class to draw the Sierpinski fractal
+
+
+int input_level;
 
 
 struct Point {
@@ -64,13 +66,14 @@ void display() {
 	a.x=-1.0; a.y=-0.866f;
 	b.x=1.0; b.y=-0.866f;
 	c.x=0.0; c.y=0.866f;
-	drawSierpinski(a,b,c,3);
+	drawSierpinski(a,b,c,input_level);
  
    glFlush();  // Render now
 }
  
 int main(int argc, char** argv) {
 	srand(time(0));
+	cin >> input_level;
 	glutInit(&argc, argv);                 // Initialize GLUT
 	glutInitWindowSize(320, 320);   // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner

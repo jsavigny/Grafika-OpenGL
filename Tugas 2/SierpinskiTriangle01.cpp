@@ -11,7 +11,13 @@
 /* modified to add comments & viewport stuff, */
 /*  and package code slightly differently -lizb 1/03 */
 
+/* Modified by Julio Savigny */
+
 #include <GL/glut.h>
+#include <iostream>
+
+using namespace std;
+int input_points;
 
 /* initialization: */
 void myinit(void)
@@ -47,7 +53,7 @@ void drawGasket()
     point2 p ={75.0,50.0};  /* An arbitrary initial point inside triangle */
 
     /* compute and plot 5000 points on the gasket: */
-    for( k=0; k<10000; k++)
+    for( k=0; k<input_points; k++)
     {
       /* first, pick a vertex at random */
          j=rand()%3; 
@@ -80,9 +86,7 @@ void display()
 
 int main(int argc, char** argv)
 {
-
-/* Standard GLUT initialization */
-
+    cin>>input_points;
     glutInit(&argc,argv);
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB); /* default, not needed */
     glutInitWindowSize(500,500); /* 500 x 500 pixel window */

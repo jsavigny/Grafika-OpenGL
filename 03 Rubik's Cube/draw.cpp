@@ -1,5 +1,6 @@
 #include "draw.hpp"
-
+#include <SOIL.h>
+GLuint theTexture;
 GLfloat vertices[][3] = {
     // center
     {-1.f, -1.f, -1.f},
@@ -291,6 +292,19 @@ int
     left[3][3] = {{5, 5, 5}, {5, 5, 5}, {5, 5, 5}};
 
 void polygon(int indexColor, int a, int b, int c, int d) {
+
+   //GLuint theTexture;
+   
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, theTexture);
+   glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+
+
+
     glColor3f(0, 0, 0);
     glLineWidth(3.f);
     glBegin(GL_LINE_LOOP);
@@ -302,10 +316,10 @@ void polygon(int indexColor, int a, int b, int c, int d) {
 
     glColor3fv(color[indexColor]);
     glBegin(GL_POLYGON);
-    glVertex3fv(vertices[a]);
-    glVertex3fv(vertices[b]);
-    glVertex3fv(vertices[c]);
-    glVertex3fv(vertices[d]);
+    glTexCoord2d(0.0,0.0); glVertex3fv(vertices[a]);
+    glTexCoord2d(1.0,0.0); glVertex3fv(vertices[b]);
+    glTexCoord2d(1.0,1.0); glVertex3fv(vertices[c]);
+    glTexCoord2d(0.0,1.0); glVertex3fv(vertices[d]);
     glEnd();
 }
 
@@ -584,7 +598,13 @@ void draw_cube(GLfloat theta, GLfloat p, GLfloat q, GLfloat r, GLint rotation, G
     glLoadIdentity();
 
     glColor3fv(color[0]);
-
+    theTexture = SOIL_load_OGL_texture
+   (
+      "steel.png",
+      SOIL_LOAD_AUTO,
+      SOIL_CREATE_NEW_ID,
+      SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+   );
     glPushMatrix();
     glRotatef(25.f + p, 1.f, 0.f, 0.f);
     glRotatef(-30.f + q, 0.f, 1.f, 0.f);

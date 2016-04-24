@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include <GL/glut.h>
-
+#include <SOIL.h>
 #include "draw.hpp"
 
 using namespace std;
@@ -162,6 +162,7 @@ void reshape(int w, int h) {
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
+    
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize (500, 500);
     glutCreateWindow ("Rubik's Cube");

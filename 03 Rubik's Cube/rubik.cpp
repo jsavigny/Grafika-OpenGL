@@ -29,6 +29,7 @@ const GLchar KEY_ROTATE_FRONT = 'g';
 const GLchar KEY_ROTATE_FRONT_REVERSE = 't';
 const GLchar KEY_ROTATE_BACK = 'h';
 const GLchar KEY_ROTATE_BACK_REVERSE = 'y';
+const GLchar KEY_LIGHT = 'l';
 
 const GLchar KEY_RESET_CUBE = 'z';
 const GLchar KEY_RESET_SCREEN = 'x';
@@ -42,8 +43,11 @@ vector<GLchar> key_mapping {
     KEY_ROTATE_BACK, KEY_ROTATE_BACK_REVERSE
 };
 
+int ambient=0,diffuse=0,specular=0;
+int ambientIntensity=0;
+
 void display() {
-    draw_cube(theta, p, q, r, rotation, inverse);
+    draw_cube(theta, p, q, r, rotation, inverse, ambient, diffuse, specular, ambientIntensity);
 }
 
 void spin_cube() {
@@ -143,6 +147,46 @@ static void keyboard(unsigned char key, int x, int y) {
             p = q = r = 0.f;
             glutIdleFunc(spin_cube);
         return;
+
+        case '1':
+            if (ambient==0){
+                ambient=1;
+            } else {
+                ambient=0;
+            }
+            glutIdleFunc(spin_cube);
+        return;
+
+        case '2':
+            if (diffuse==0){
+                diffuse=1;
+            } else {
+                diffuse=0;
+            }
+            glutIdleFunc(spin_cube);
+        return;
+
+        case '3':
+            if (specular==0){
+                specular=1;
+            } else {
+                specular=0;
+            }
+            glutIdleFunc(spin_cube);
+        return;
+
+        case '=':
+            ambientIntensity++;
+            ambientIntensity%=10;
+            glutIdleFunc(spin_cube);
+        return;
+
+        case '-':
+            ambientIntensity--;
+            ambientIntensity%=10;
+            glutIdleFunc(spin_cube);
+        return;
+
     }
 
     key_pressed = false;

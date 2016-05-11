@@ -3,7 +3,8 @@
 
 #include <GL/glut.h>
 
-void draw_cube(GLfloat theta, GLfloat p, GLfloat q, GLfloat r, GLint rotation, GLboolean inverse);
+void draw_cube(GLfloat theta, GLfloat p, GLfloat q, GLfloat r, GLint rotation, GLboolean inverse, int ambient,
+	int diffuse, int specular, int ambientIntensity);
 void reset_cube();
 void rotate_top();
 void rotate_bottom();
